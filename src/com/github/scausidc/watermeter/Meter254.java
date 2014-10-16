@@ -44,7 +44,7 @@ public class Meter254 extends HttpServlet
 
             String resp1 = Request.Get("http://10.50.9.254/userRpm/SystemStatisticRpm.htm")
                 .setHeader("Authorization", "Basic "+this.realm)
-                .viaProxy(new HttpHost("localhost", 8888))
+                //.viaProxy(new HttpHost("localhost", 8888))
                 .execute()
                 .returnContent()
                 .asString();
