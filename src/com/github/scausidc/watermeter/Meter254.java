@@ -113,7 +113,25 @@ public class Meter254 extends HttpServlet
             }
 
             return(root);
+    }
 
+    public void doGet(HttpServletRequest req, HttpServletResponse resp)
+    {
+        try
+        {
+            resp.setContentType("application/json");
+            Writer out = resp.getWriter();
+
+            Map<String, Map<String, String>> root = this.fetch();
+
+            JSONObject json = (JSONObject)JSON.toJSON(root);
+            json.writeJSONString(out);
+        }
+        catch (Exception ex)
+        {
+            this.getServletContext().log("", ex);
+            resp.setStatus(500);
+        }
     }
 
     public static void main(String[] args)

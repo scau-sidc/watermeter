@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  </head>
+
+  <body>
+    <script>
+      var xhr = new XMLHttpRequest();
+      xhr.open("GET", "statistic.json", false);
+      xhr.send();
+
+      var hosts = JSON.parse(xhr.responseText);
+      
+      var table = document.createElement("table");
+      var headRow = table.createTHead().insertRow(-1);
+      headRow.insertCell(-1).appendChild(
+        document.createTextNode("IP")
+      );
+      headRow.insertCell(-1).appendChild(
+        document.createTextNode("计算机名")
+      );
+      headRow.insertCell(-1).appendChild(
+        document.createTextNode("累计数据包")
+      );
+      headRow.insertCell(-1).appendChild(
+        document.createTextNode("累计字节数")
+      );
+      headRow.insertCell(-1).appendChild(
+        document.createTextNode("实时数据包")
+      );
+      headRow.insertCell(-1).appendChild(
+        document.createTextNode("实时字节数")
+      );
+      headRow.insertCell(-1).appendChild(
+        document.createTextNode("ICMP tx")
+      );
+      headRow.insertCell(-1).appendChild(
+        document.createTextNode("UDP tx")
+      );
+      headRow.insertCell(-1).appendChild(
+        document.createTextNode("TCP SYN tx")
+      );
+
+      for (var ip in hosts)
+      {
+        var row = table.insertRow(-1);
+        
+        row.insertCell(-1).appendChild(
+          document.createTextNode(ip)
+        );
+        row.insertCell(-1).appendChild(
+          document.createTextNode(hosts[ip].name)
+        );
+        row.insertCell(-1).appendChild(
+          document.createTextNode(hosts[ip].accumulated_packets)
+        );
+        row.insertCell(-1).appendChild(
+          document.createTextNode(hosts[ip].accumulated_bytes)
+        );
+        row.insertCell(-1).appendChild(
+          document.createTextNode(hosts[ip].transient_packets)
+        );
+        row.insertCell(-1).appendChild(
+          document.createTextNode(hosts[ip].transient_bytes)
+        );
+        row.insertCell(-1).appendChild(
+          document.createTextNode(hosts[ip].icmp_tx)
+        );
+        row.insertCell(-1).appendChild(
+          document.createTextNode(hosts[ip].udp_tx)
+        );
+        row.insertCell(-1).appendChild(
+          document.createTextNode(hosts[ip].tcp_syn_tx)
+        );
+      }
+
+      document.body.appendChild(table);
+    </script>
+  </body>
+</html>
