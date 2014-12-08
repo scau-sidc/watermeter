@@ -110,6 +110,7 @@ public class Meter254 extends HttpServlet
                 }
 
                 sub.put("name",  items[ 3]);
+                sub.put("mac",   items[ 5]);
             }
 
             return(root);
